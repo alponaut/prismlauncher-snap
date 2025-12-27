@@ -1,0 +1,108 @@
+name: prismlauncher-alpo
+title: Prism Launcher
+base: core24
+version: '9.4'
+
+license: GPL-3.0
+website: https://prismlauncher.org
+contact: https://github.com/alponaut/prismlauncher-snap/issues
+issues: https://github.com/alponaut/prismlauncher-snap/issues
+source-code: https://github.com/alponaut/prismlauncher-snap
+icon: snap/gui/Prism_Launcher_logo.svg
+
+summary: Custom Minecraft Launcher manage multiple Minecraft installations at once
+description: |
+  Prism Launcher is a custom launcher for Minecraft that focuses on predictability, long term stability and simplicity.
+  
+  Features:
+
+  * Easily install game modifications, such as Fabric, Forge and Quilt
+  * Easily install and update modpacks from the Launcher
+  * Manage worlds and resource packs from the launcher
+  * See logs and other details easily through a dashboard
+  * Kill Minecraft in case of a crash/freeze
+  * Isolate Minecraft instances to keep everything clean
+  * Install and update mods directly from the launcher
+  * Customize the launcher with themes, and more
+  * And cat :3
+  
+  **Authors**
+
+  This snap package is not maintained by the official developers.
+  It is not necessarily endorsed or officially supported by the
+  developers of the application itself.
+
+grade: stable
+confinement: strict
+compression: lzo
+
+platforms:
+  amd64:
+  arm64:
+
+slots:
+  prismlauncher-dbus:
+    interface: dbus
+    bus: session
+    name: org.prismlauncher.PrismLauncher
+
+apps:
+  prismlauncher:
+    extensions: [kde-neon-6]
+    command: usr/bin/prismlauncher
+    environment:
+      HOME: "$SNAP_USER_COMMON"
+    plugs:
+      - desktop
+      - desktop-legacy
+      - opengl
+      - wayland
+      - x11
+      - audio-playback
+      - unity7
+      - network
+      - network-bind
+      - gsettings
+      - browser-support
+      - joystick
+      - home
+
+parts:
+  prismlauncher:
+    plugin: cmake
+    source: https://github.com/PrismLauncher/PrismLauncher.git
+    source-tag: $SNAPCRAFT_PROJECT_VERSION
+    cmake-parameters:
+      - -DCMAKE_BUILD_TYPE=Release
+      - -DCMAKE_INSTALL_PREFIX=/usr
+      - -DBUILD_TESTING=OFF
+    build-packages:
+      - cmake
+      - ninja-build
+      - extra-cmake-modules
+      - openjdk-17-jdk
+      - libgl1-mesa-dev
+      - duktape-dev
+      - libproxy-dev
+      - libxkbcommon-dev
+      - libvulkan-dev
+    stage-packages:
+      - libxkbcommon0
+      - openjdk-8-jre
+      - openjdk-17-jre
+      - openjdk-21-jre
+      - x11-xserver-utils
+      - libproxy1v5
+  
+  gpu-2404:
+    after: [prismlauncher]
+    source: https://github.com/canonical/gpu-snap.git
+    plugin: dump
+    override-prime: |
+      craftctl default
+      ${CRAFT_PART_SRC}/bin/gpu-2404-cleanup mesa-2404
+      # Workaround for https://bugs.launchpad.net/snapd/+bug/2055273
+      mkdir -p "${CRAFT_PRIME}/gpu-2404"
+    prime:
+    - bin/gpu-2404-wrapper
+         
