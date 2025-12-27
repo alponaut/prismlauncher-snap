@@ -60,6 +60,7 @@ apps:
       - browser-support
       - joystick
       - home
+      - screen-inhibit-control
 
 parts:
   prismlauncher:
