@@ -40,12 +40,18 @@ platforms:
   amd64:
   arm64:
 
+slots:
+  prismlauncher-dbus:
+    interface: dbus
+    bus: session
+    name: org.prismlauncher.PrismLauncher
+
 apps:
   prismlauncher:
     extensions: [kde-neon-6]
     command: usr/bin/prismlauncher
-    environment:
-      HOME: "$SNAP_USER_COMMON"
+    slots: 
+      - prismlauncher-dbus
     plugs:
       - desktop
       - desktop-legacy
@@ -53,7 +59,6 @@ apps:
       - wayland
       - x11
       - audio-playback
-      - unity7
       - network
       - network-bind
       - browser-support
@@ -71,8 +76,6 @@ parts:
       - -DCMAKE_INSTALL_PREFIX=/usr
       - -DBUILD_TESTING=OFF
     build-packages:
-      - cmake
-      - cmark
       - ninja-build
       - extra-cmake-modules
       - openjdk-17-jdk
@@ -82,13 +85,13 @@ parts:
       - libxkbcommon-dev
       - libvulkan-dev
       - libcmark-dev
+      - gamemode
     stage-packages:
-      - libxkbcommon0
       - openjdk-8-jre
       - openjdk-17-jre
       - openjdk-21-jre
       - x11-xserver-utils
-      - libproxy1v5
+      - gamemode
   
   gpu-2404:
     after: [prismlauncher]
