@@ -89,6 +89,7 @@ parts:
       - openjdk-21-jre
       - x11-xserver-utils
       - gamemode
+      - libtomlplusplus3t64
   
   gpu-2404:
     after: [prismlauncher]
