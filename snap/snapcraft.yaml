@@ -76,6 +76,7 @@ parts:
       - -DCMAKE_INSTALL_PREFIX=/usr
       - -DBUILD_TESTING=OFF
     build-packages:
+      - cmark
       - ninja-build
       - extra-cmake-modules
       - openjdk-17-jdk
