@@ -81,6 +81,7 @@ parts:
       - libproxy-dev
       - libxkbcommon-dev
       - libvulkan-dev
+      - libcmark-dev
     stage-packages:
       - libxkbcommon0
       - openjdk-8-jre
