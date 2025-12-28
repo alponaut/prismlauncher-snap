@@ -86,6 +86,7 @@ parts:
       - libxkbcommon-dev
       - libvulkan-dev
       - libcmark-dev
+      - libqrencode-dev
       - pkg-config
       - gamemode-dev
     stage-packages:
@@ -93,8 +94,7 @@ parts:
       - openjdk-17-jre
       - openjdk-21-jre
       - x11-xserver-utils
-      - libgamemode0
-      - libgamemodeauto0
+      - gamemode
   
   gpu-2404:
     after: [prismlauncher]
