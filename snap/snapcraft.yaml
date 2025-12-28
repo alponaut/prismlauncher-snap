@@ -90,6 +90,7 @@ parts:
       - x11-xserver-utils
       - gamemode
       - libtomlplusplus3t64
+      - libcmark0.30.2
   
   gpu-2404:
     after: [prismlauncher]
