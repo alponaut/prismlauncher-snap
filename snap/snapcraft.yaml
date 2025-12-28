@@ -72,6 +72,7 @@ parts:
       - -DBUILD_TESTING=OFF
     build-packages:
       - cmake
+      - cmark
       - ninja-build
       - extra-cmake-modules
       - openjdk-17-jdk
