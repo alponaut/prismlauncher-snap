@@ -10,7 +10,7 @@ issues: https://github.com/alponaut/prismlauncher-snap/issues
 source-code: https://github.com/alponaut/prismlauncher-snap
 icon: snap/gui/Prism_Launcher_logo.svg
 
-summary: Custom Minecraft Launcher manage multiple Minecraft installations at once
+summary: Custom Minecraft Launcher to manage multiple Minecraft installations at once
 description: |
   Prism Launcher is a custom launcher for Minecraft that focuses on predictability, long term stability and simplicity.
   
@@ -83,9 +83,7 @@ parts:
       - libvulkan-dev
     stage-packages:
       - libxkbcommon0
-      - openjdk-8-jre
       - openjdk-17-jre
-      - openjdk-21-jre
       - x11-xserver-utils
       - libproxy1v5
   
