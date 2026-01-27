@@ -1,7 +1,7 @@
 name: prismlauncher-alpo
 title: Prism Launcher
 base: core24
-version: '10.0.0-pre1'
+version: '10.0.2'
 
 license: GPL-3.0
 website: https://prismlauncher.org
@@ -88,7 +88,8 @@ parts:
       - openjdk-17-jre
       - openjdk-21-jre
       - x11-xserver-utils
-      - gamemode
+      - libgamemode0
+      - libgamemodeauto0
       - libtomlplusplus3t64
       - libcmark0.30.2
   
