@@ -67,6 +67,8 @@ parts:
       - -DCMAKE_BUILD_TYPE=Release
       - -DCMAKE_INSTALL_PREFIX=/usr
       - -DBUILD_TESTING=OFF
+      - -DLauncher_BUILD_PLATFORM=snap
+      - -DLauncher_ENABLE_JAVA_DOWNLOADER=ON
     build-packages:
       - cmark
       - ninja-build
@@ -84,9 +86,6 @@ parts:
       - pkg-config
       - gamemode-dev
     stage-packages:
-      - openjdk-8-jre
-      - openjdk-17-jre
-      - openjdk-21-jre
       - x11-xserver-utils
       - libgamemode0
       - libgamemodeauto0
