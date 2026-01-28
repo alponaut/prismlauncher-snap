@@ -73,7 +73,7 @@ parts:
       craftctl default
       for file in ${CRAFT_PROJECT_DIR}/snap/local/patches/*
       do
-        patch -i $file
+        patch -Np1 -i $file
       done
     build-packages:
       - cmark
