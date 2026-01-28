@@ -69,6 +69,12 @@ parts:
       - -DBUILD_TESTING=OFF
       - -DLauncher_BUILD_PLATFORM=snap
       - -DLauncher_ENABLE_JAVA_DOWNLOADER=ON
+    override-pull: |
+      craftctl default
+      for file in ${CRAFT_PROJECT_DIR}/snap/local/patches/*
+      do
+        patch -i $file -p 1
+      done
     build-packages:
       - cmark
       - ninja-build
