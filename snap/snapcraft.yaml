@@ -91,14 +91,20 @@ parts:
       - libqrencode-dev
       - pkg-config
       - gamemode-dev
+      # Narrator
       - flite1-dev
+      # Wayland Support
+      - libdecor-0-dev
     stage-packages:
       - x11-xserver-utils
       - libgamemode0
       - libgamemodeauto0
       - libtomlplusplus3t64
       - libcmark0.30.2
+      # Narrator
       - flite
+      # Wayland Support
+      - libdecor-0-0
   
   gpu-2404:
     after: [prismlauncher]
