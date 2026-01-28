@@ -71,10 +71,10 @@ parts:
       - -DLauncher_ENABLE_JAVA_DOWNLOADER=ON
     override-pull: |
       craftctl default
-      patch -p1 < $CRAFT_PROJECT_DIR/snap/local/patches/0001-Ez-peazy.flite.patch
-      patch -p1 < $CRAFT_PROJECT_DIR/snap/local/patches/0001-Wayland-Partially-implement-glfwSetCursorPos.patch
-      patch -p1 < $CRAFT_PROJECT_DIR/snap/local/patches/0002-Wayland-Implement-glfwSetWindowIcon.patch
-      patch -p1 < $CRAFT_PROJECT_DIR/snap/local/patches/0003-proceed-even-though-no-window-icon-support-on-waylan.patch
+      for file in ${CRAFT_PROJECT_DIR}/snap/local/patches/*
+      do
+        patch -i $file
+      done
     build-packages:
       - cmark
       - ninja-build
