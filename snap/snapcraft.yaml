@@ -49,11 +49,16 @@ layout:
     symlink: $SNAP/usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR/libflite.so.1
   /usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR/libflite_cmu_us_kal16.so:
     symlink: $SNAP/usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR/libflite_cmu_us_kal16.so.1
+  /usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR/alsa-lib:
+    bind: $SNAP/usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR/alsa-lib
 
 apps:
   prismlauncher:
     extensions: [kde-neon-6]
     command: usr/bin/prismlauncher
+    environment: 
+      ALSA_CONFIG_PATH: "$SNAP/etc/asound.conf"
+      LD_LIBRARY_PATH: $SNAP/usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR/pulseaudio:$LD_LIBRARY_PATH
     plugs:
       - desktop
       - desktop-legacy
@@ -105,9 +110,30 @@ parts:
       - flite
       - libasound2t64
       - libasound2-plugins
+      - libpulse0
+
+  alsa-pulseaudio:
+    after: [prismlauncher]
+    plugin: nil
+    override-build: |
+      mkdir etc -p
+      cat > etc/asound.conf <<EOF
+      pcm.!default {
+          type pulse
+          fallback "sysdefault"
+          hint {
+              show on
+              description "Default ALSA Output (currently PulseAudio Sound Server)"
+          }
+      }
+      ctl.!default {
+          type pulse
+          fallback "sysdefault"
+      }
+      EOF
   
   gpu-2404:
-    after: [prismlauncher]
+    after: [prismlauncher, alsa-pulseaudio]
     source: https://github.com/canonical/gpu-snap.git
     plugin: dump
     override-prime: |
