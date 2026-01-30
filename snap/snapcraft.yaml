@@ -103,6 +103,8 @@ parts:
       - libtomlplusplus3t64
       - libcmark0.30.2
       - flite
+      - libasound2t64
+      - libasound2-plugins
   
   gpu-2404:
     after: [prismlauncher]
