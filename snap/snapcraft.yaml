@@ -47,6 +47,8 @@ platforms:
 layout:
   /usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR/libflite.so:
     symlink: $SNAP/usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR/libflite.so.1
+  /usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR/libflite_cmu_us_kal16.so:
+    symlink: $SNAP/usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR/libflite_cmu_us_kal16.so.1
 
 apps:
   prismlauncher:
