@@ -8,7 +8,6 @@ website: https://prismlauncher.org
 contact: https://github.com/alponaut/prismlauncher-snap/issues
 issues: https://github.com/alponaut/prismlauncher-snap/issues
 source-code: https://github.com/alponaut/prismlauncher-snap
-icon: snap/gui/Prism_Launcher_logo.svg
 
 grade: stable
 confinement: strict
