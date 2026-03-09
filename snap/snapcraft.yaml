@@ -2,7 +2,7 @@ name: prismlauncher-alpo
 title: Prism Launcher
 base: core24
 version: '10.0.5'
-
+adopt-info: prismlauncher
 license: GPL-3.0
 website: https://prismlauncher.org
 contact: https://github.com/alponaut/prismlauncher-snap/issues
