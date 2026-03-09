@@ -10,28 +10,6 @@ issues: https://github.com/alponaut/prismlauncher-snap/issues
 source-code: https://github.com/alponaut/prismlauncher-snap
 icon: snap/gui/Prism_Launcher_logo.svg
 
-summary: Custom Minecraft Launcher to manage multiple Minecraft installations at once
-description: |
-  Prism Launcher is a custom launcher for Minecraft that focuses on predictability, long term stability and simplicity.
-  
-  Features:
-
-  * Easily install game modifications, such as Fabric, Forge and Quilt
-  * Easily install and update modpacks from the Launcher
-  * Manage worlds and resource packs from the launcher
-  * See logs and other details easily through a dashboard
-  * Kill Minecraft in case of a crash/freeze
-  * Isolate Minecraft instances to keep everything clean
-  * Install and update mods directly from the launcher
-  * Customize the launcher with themes, and more
-  * And cat :3
-  
-  **Authors**
-
-  This snap package is not maintained by the official developers.
-  It is not necessarily endorsed or officially supported by the
-  developers of the application itself.
-
 grade: stable
 confinement: strict
 compression: lzo
@@ -56,6 +34,7 @@ apps:
   prismlauncher:
     extensions: [kde-neon-6]
     command: usr/bin/prismlauncher
+    desktop: usr/share/applications/org.prismlauncher.PrismLauncher.desktop
     common-id: org.prismlauncher.PrismLauncher
     environment: 
       ALSA_CONFIG_PATH: "$SNAP/etc/asound.conf"
@@ -78,6 +57,8 @@ parts:
     plugin: cmake
     source: https://github.com/PrismLauncher/PrismLauncher.git
     source-tag: $SNAPCRAFT_PROJECT_VERSION
+    parse-info:
+      - usr/share/metainfo/org.prismlauncher.PrismLauncher.metainfo.xml
     cmake-parameters:
       - -DCMAKE_BUILD_TYPE=Release
       - -DCMAKE_INSTALL_PREFIX=/usr
