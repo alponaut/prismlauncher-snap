@@ -6,7 +6,7 @@ index ec4ebb31a..682c4b209 100644
  
  #include "FileSystem.h"
  
-+#include <QEnvironmentVariables>
++#include <QtEnvironmentVariables>
  #include <QApplication>
  #include <QFileDialog>
  
