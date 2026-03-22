@@ -33,7 +33,7 @@ index ec4ebb31a..c4aeabe25 100644
 +    QString shortcutFilePath = FS::PathCombine(defaultedDir, FS::RemoveInvalidFilenameChars(shortcut.name) + extension);
 +    QFileDialog fileDialog;
 +    // workaround to make sure the portal file dialog opens in the desktop directory
-+    fileDialog.setDirectoryUrl(defaultedDir);
++    fileDialog.setDirectoryUrl("file:///home/$USER/.local/share/applications/");
  
 -    QDir applicationsDirQ(applicationsDir);
 -    if (!applicationsDirQ.mkpath(".")) {
