@@ -19,7 +19,7 @@ index ec4ebb31a..c4aeabe25 100644
 -        QMessageBox::critical(shortcut.parent, QObject::tr("Create Shortcut"), QObject::tr("Couldn't find applications folder?!"));
 -        return false;
 -    }
-+    QString defaultedDir = "/home/$USER/.local/share/applications";
++    QString defaultedDir = "file:///home/$USER/.local/share/applications";
 +#if defined(Q_OS_LINUX) || defined(Q_OS_FREEBSD) || defined(Q_OS_OPENBSD)
 +    QString extension = ".desktop";
 +#elif defined(Q_OS_WINDOWS)
