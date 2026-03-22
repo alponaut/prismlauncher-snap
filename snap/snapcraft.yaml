@@ -57,10 +57,13 @@ parts:
     plugin: cmake
     source: https://github.com/PrismLauncher/PrismLauncher.git
     source-tag: $SNAPCRAFT_PROJECT_VERSION
+    override-pull: |
+      craftctl default
+      patch -p1 < $CRAFT_PROJECT_DIR/patches/fixshortcutpath.patch
     parse-info:
       - usr/share/metainfo/org.prismlauncher.PrismLauncher.metainfo.xml
     cmake-parameters:
-      - -DCMAKE_BUILD_TYPE=Release
+      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
       - -DCMAKE_INSTALL_PREFIX=/usr
       - -DBUILD_TESTING=OFF
       - -DLauncher_BUILD_PLATFORM=snap
