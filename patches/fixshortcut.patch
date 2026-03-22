@@ -1,0 +1,55 @@
+diff --git a/launcher/minecraft/ShortcutUtils.cpp b/launcher/minecraft/ShortcutUtils.cpp
+index ec4ebb31a..c4aeabe25 100644
+--- a/launcher/minecraft/ShortcutUtils.cpp
++++ b/launcher/minecraft/ShortcutUtils.cpp
+@@ -98,6 +98,7 @@ bool createInstanceShortcut(const Shortcut& shortcut, const QString& filePath)
+     }
+ 
+     iconPath = FS::PathCombine(shortcut.instance->instanceRoot(), "icon.png");
++    appPath = "/snap/bin/prismlauncher-alpo.prismlauncher";
+ 
+     QFile iconFile(iconPath);
+     if (!iconFile.open(QFile::WriteOnly)) {
+@@ -187,24 +188,27 @@ bool createInstanceShortcutInApplications(const Shortcut& shortcut)
+     if (!shortcut.instance)
+         return false;
+ 
+-    QString applicationsDir = FS::getApplicationsDir();
+-    if (applicationsDir.isEmpty()) {
+-        QMessageBox::critical(shortcut.parent, QObject::tr("Create Shortcut"), QObject::tr("Couldn't find applications folder?!"));
+-        return false;
+-    }
++    QString defaultedDir = "/home/$USER/.local/share/applications";
++#if defined(Q_OS_LINUX) || defined(Q_OS_FREEBSD) || defined(Q_OS_OPENBSD)
++    QString extension = ".desktop";
++#elif defined(Q_OS_WINDOWS)
++    QString extension = ".lnk";
++#else
++    QString extension = "";
++#endif
+ 
+-#if defined(Q_OS_MACOS) || defined(Q_OS_WIN)
+-    applicationsDir = FS::PathCombine(applicationsDir, BuildConfig.LAUNCHER_DISPLAYNAME + " Instances");
++    QString shortcutFilePath = FS::PathCombine(defaultedDir, FS::RemoveInvalidFilenameChars(shortcut.name) + extension);
++    QFileDialog fileDialog;
++    // workaround to make sure the portal file dialog opens in the desktop directory
++    fileDialog.setDirectoryUrl(defaultedDir);
+ 
+-    QDir applicationsDirQ(applicationsDir);
+-    if (!applicationsDirQ.mkpath(".")) {
+-        QMessageBox::critical(shortcut.parent, QObject::tr("Create Shortcut"),
+-                              QObject::tr("Failed to create instances folder in applications folder!"));
+-        return false;
+-    }
+-#endif
++    shortcutFilePath = fileDialog.getSaveFileName(shortcut.parent, QObject::tr("Create Shortcut"), shortcutFilePath,
++                                                  QObject::tr("Desktop Entries") + " (*" + extension + ")");
++    if (shortcutFilePath.isEmpty())
++        return false;  // file dialog canceled by user
+ 
+-    QString shortcutFilePath = FS::PathCombine(applicationsDir, FS::RemoveInvalidFilenameChars(shortcut.name));
++    if (shortcutFilePath.endsWith(extension))
++        shortcutFilePath = shortcutFilePath.mid(0, shortcutFilePath.length() - extension.length());
+     if (!createInstanceShortcut(shortcut, shortcutFilePath))
+         return false;
+     QMessageBox::information(shortcut.parent, QObject::tr("Create Shortcut"),
