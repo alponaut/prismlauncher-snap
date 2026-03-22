@@ -59,7 +59,7 @@ parts:
     source-tag: $SNAPCRAFT_PROJECT_VERSION
     override-pull: |
       craftctl default
-      patch -p1 < $CRAFT_PROJECT_DIR/patches/fixshortcutpath.patch
+      patch -p1 < $CRAFT_PROJECT_DIR/patches/fixshortcut.patch
     parse-info:
       - usr/share/metainfo/org.prismlauncher.PrismLauncher.metainfo.xml
     cmake-parameters:
