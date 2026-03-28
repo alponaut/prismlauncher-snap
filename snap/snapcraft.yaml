@@ -12,7 +12,6 @@ summary: Custom Minecraft Launcher to easily manage multiple Minecraft installat
 
 grade: stable
 confinement: strict
-compression: lzo
 
 platforms:
   amd64:
@@ -36,18 +35,8 @@ apps:
     command: usr/bin/prismlauncher
     desktop: usr/share/applications/org.prismlauncher.PrismLauncher.desktop
     common-id: org.prismlauncher.PrismLauncher
-    environment: 
-      ALSA_CONFIG_PATH: "$SNAP/etc/asound.conf"
-      LD_LIBRARY_PATH: $SNAP/usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR/pulseaudio:$LD_LIBRARY_PATH
     plugs:
-      - desktop
-      - desktop-legacy
-      - opengl
-      - wayland
-      - x11
-      - audio-playback
-      - network
-      - network-bind
+      - audio-record
       - joystick
       - home
       - screen-inhibit-control
@@ -93,36 +82,17 @@ parts:
       - libasound2t64
       - libasound2-plugins
       - libpulse0
-
-  alsa-pulseaudio:
-    after: [prismlauncher]
-    plugin: nil
-    override-build: |
-      mkdir etc -p
-      cat > etc/asound.conf <<EOF
-      pcm.!default {
-          type pulse
-          fallback "sysdefault"
-          hint {
-              show on
-              description "Default ALSA Output (currently PulseAudio Sound Server)"
-          }
-      }
-      ctl.!default {
-          type pulse
-          fallback "sysdefault"
-      }
-      EOF
   
-  gpu-2404:
-    after: [prismlauncher, alsa-pulseaudio]
-    source: https://github.com/canonical/gpu-snap.git
-    plugin: dump
+  cleanup:
+    after:
+      - prismlauncher
+    plugin: nil
+    build-snaps:
+      - core24
+      - kf6-core24
+      - mesa-2404
     override-prime: |
-      craftctl default
-      ${CRAFT_PART_SRC}/bin/gpu-2404-cleanup mesa-2404
-      # Workaround for https://bugs.launchpad.net/snapd/+bug/2055273
-      mkdir -p "${CRAFT_PRIME}/gpu-2404"
-    prime:
-    - bin/gpu-2404-wrapper
-         
+      set -eux
+      for snap in "core24" "kf6-core24" "mesa-2404"; do
+          cd "/snap/$snap/current" && find . -type f,l -exec rm -rf "$CRAFT_PRIME/{}" \;
+      done
