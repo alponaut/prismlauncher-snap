@@ -30,6 +30,8 @@ layout:
     bind: $SNAP/usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR/alsa-lib
   /usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR/libtomlplusplus.so.3:
     symlink: $SNAP/usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR/libtomlplusplus.so.3
+  /usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR/libcmark.so.0.30.2:
+    symlink: $SNAP/usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR/libcmark.so.0.30.2
 
 apps:
   prismlauncher:
