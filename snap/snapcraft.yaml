@@ -38,7 +38,6 @@ apps:
     extensions: [kde-neon-6]
     command: usr/bin/prismlauncher
     desktop: usr/share/applications/org.prismlauncher.PrismLauncher.desktop
-    common-id: org.prismlauncher.PrismLauncher
     plugs:
       - audio-record
       - joystick
