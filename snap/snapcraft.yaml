@@ -37,6 +37,7 @@ apps:
   prismlauncher:
     extensions: [kde-neon-6]
     command: usr/bin/prismlauncher
+    common-id: org.prismlauncher.PrismLauncher
     desktop: usr/share/applications/org.prismlauncher.PrismLauncher.desktop
     plugs:
       - audio-record
