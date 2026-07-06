@@ -22,10 +22,6 @@ platforms:
     build-for: [arm64]
 
 layout:
-  /usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR/libflite.so:
-    symlink: $SNAP/usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR/libflite.so.1
-  /usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR/libflite_cmu_us_kal16.so:
-    symlink: $SNAP/usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR/libflite_cmu_us_kal16.so.1
   /usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR/alsa-lib:
     bind: $SNAP/usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR/alsa-lib
   /usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR/libtomlplusplus.so.3:
