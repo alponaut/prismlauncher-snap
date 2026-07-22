@@ -82,6 +82,8 @@ parts:
       - libtomlplusplus3t64
       - libvulkan1
       - zlib1g
+      - pciutils
+      - mesa-utils
       - x11-xserver-utils
       - flite
       - libasound2t64
