@@ -75,6 +75,7 @@ parts:
       - libtomlplusplus-dev
       - libvulkan-dev
       - zlib1g-dev
+      - openjdk-17-jdk
     stage-packages:
       - libarchive13t64
       - libcmark0.30.2
