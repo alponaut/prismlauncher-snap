@@ -1,49 +1,25 @@
 diff --git a/launcher/minecraft/ShortcutUtils.cpp b/launcher/minecraft/ShortcutUtils.cpp
-index 7d662fe8b..c6258d556 100644
+index 7d662fe8b..6918cac93 100644
 --- a/launcher/minecraft/ShortcutUtils.cpp
 +++ b/launcher/minecraft/ShortcutUtils.cpp
-@@ -98,6 +98,7 @@ bool createInstanceShortcut(const Shortcut& shortcut, const QString& filePath)
+@@ -97,6 +97,7 @@ bool createInstanceShortcut(const Shortcut& shortcut, const QString& filePath)
+         }
      }
  
-     iconPath = FS::PathCombine(shortcut.instance->instanceRoot(), "icon.png");
 +    appPath = "/snap/bin/prismlauncher-alpo.prismlauncher";
+     iconPath = FS::PathCombine(shortcut.instance->instanceRoot(), "icon.png");
  
      QFile iconFile(iconPath);
-     if (!iconFile.open(QFile::WriteOnly)) {
-@@ -182,36 +183,6 @@ bool createInstanceShortcutOnDesktop(const Shortcut& shortcut)
-     return true;
+diff --git a/launcher/ui/dialogs/CreateShortcutDialog.cpp b/launcher/ui/dialogs/CreateShortcutDialog.cpp
+index 7d4199f13..c2aa07ccc 100644
+--- a/launcher/ui/dialogs/CreateShortcutDialog.cpp
++++ b/launcher/ui/dialogs/CreateShortcutDialog.cpp
+@@ -215,8 +215,6 @@ void CreateShortcutDialog::createShortcut()
+     ShortcutUtils::Shortcut args{ m_instance, name, targetString, this, extraArgs, InstIconKey, target };
+     if (target == ShortcutTarget::Desktop)
+         ShortcutUtils::createInstanceShortcutOnDesktop(args);
+-    else if (target == ShortcutTarget::Applications)
+-        ShortcutUtils::createInstanceShortcutInApplications(args);
+     else
+         ShortcutUtils::createInstanceShortcutInOther(args);
  }
- 
--bool createInstanceShortcutInApplications(const Shortcut& shortcut)
--{
--    if (!shortcut.instance)
--        return false;
--
--    QString applicationsDir = FS::getApplicationsDir();
--    if (applicationsDir.isEmpty()) {
--        QMessageBox::critical(shortcut.parent, QObject::tr("Create Shortcut"), QObject::tr("Couldn't find applications folder?!"));
--        return false;
--    }
--
--#if defined(Q_OS_MACOS) || defined(Q_OS_WIN)
--    applicationsDir = FS::PathCombine(applicationsDir, BuildConfig.LAUNCHER_DISPLAYNAME + " Instances");
--
--    QDir applicationsDirQ(applicationsDir);
--    if (!applicationsDirQ.mkpath(".")) {
--        QMessageBox::critical(shortcut.parent, QObject::tr("Create Shortcut"),
--                              QObject::tr("Failed to create instances folder in applications folder!"));
--        return false;
--    }
--#endif
--
--    QString shortcutFilePath = FS::PathCombine(applicationsDir, FS::RemoveInvalidFilenameChars(shortcut.name));
--    if (!createInstanceShortcut(shortcut, shortcutFilePath))
--        return false;
--    QMessageBox::information(shortcut.parent, QObject::tr("Create Shortcut"),
--                             QObject::tr("Created a shortcut to this %1 in your applications folder!").arg(shortcut.targetString));
--    return true;
--}
--
- bool createInstanceShortcutInOther(const Shortcut& shortcut)
- {
-     if (!shortcut.instance)

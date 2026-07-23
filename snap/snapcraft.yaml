@@ -22,16 +22,16 @@ platforms:
     build-for: [arm64]
 
 layout:
-  /usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR/libflite.so:
-    symlink: $SNAP/usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR/libflite.so.1
-  /usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR/libflite_cmu_us_kal16.so:
-    symlink: $SNAP/usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR/libflite_cmu_us_kal16.so.1
   /usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR/alsa-lib:
     bind: $SNAP/usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR/alsa-lib
   /usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR/libtomlplusplus.so.3:
     symlink: $SNAP/usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR/libtomlplusplus.so.3
   /usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR/libcmark.so.0.30.2:
     symlink: $SNAP/usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR/libcmark.so.0.30.2
+  /usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR/libflite.so:
+    symlink: $SNAP/usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR/libflite.so.1
+  /usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR/libflite_cmu_us_kal16.so:
+    symlink: $SNAP/usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR/libflite_cmu_us_kal16.so.1
 
 apps:
   prismlauncher:
@@ -58,7 +58,6 @@ parts:
     cmake-parameters:
       - -DCMAKE_BUILD_TYPE=Release
       - -DCMAKE_INSTALL_PREFIX=/usr
-      - -DBUILD_TESTING=OFF
       - -DLauncher_BUILD_PLATFORM=snap
       - -DLauncher_ENABLE_JAVA_DOWNLOADER=ON
     build-packages:
@@ -86,7 +85,8 @@ parts:
       - pciutils
       - mesa-utils
       - x11-xserver-utils
-      - flite
+      - gamemode
+      - libflite1
       - libasound2t64
       - libasound2-plugins
       - libpulse0
