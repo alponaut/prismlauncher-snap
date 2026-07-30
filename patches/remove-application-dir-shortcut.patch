@@ -1,0 +1,14 @@
+diff --git a/launcher/ui/dialogs/CreateShortcutDialog.cpp b/launcher/ui/dialogs/CreateShortcutDialog.cpp
+index 7d4199f13..aad8c18f5 100644
+--- a/launcher/ui/dialogs/CreateShortcutDialog.cpp
++++ b/launcher/ui/dialogs/CreateShortcutDialog.cpp
+@@ -83,9 +83,6 @@ CreateShortcutDialog::CreateShortcutDialog(BaseInstance* instance, QWidget* pare
+ 
+         if (!desktopDir.isEmpty())
+             ui->saveTargetSelectionBox->addItem(tr("Desktop"), QVariant::fromValue(ShortcutTarget::Desktop));
+-
+-        if (!applicationDir.isEmpty())
+-            ui->saveTargetSelectionBox->addItem(tr("Applications"), QVariant::fromValue(ShortcutTarget::Applications));
+     }
+     ui->saveTargetSelectionBox->addItem(tr("Other..."), QVariant::fromValue(ShortcutTarget::Other));
+ 

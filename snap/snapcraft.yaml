@@ -52,7 +52,8 @@ parts:
     source-tag: $SNAPCRAFT_PROJECT_VERSION
     override-pull: |
       craftctl default
-      patch -p1 < $CRAFT_PROJECT_DIR/patches/fixshortcut.patch
+      patch -p1 < $CRAFT_PROJECT_DIR/patches/fix-shortcuts.patch
+      patch -p1 < $CRAFT_PROJECT_DIR/patches/remove-application-dir-shortcut.patch
     parse-info:
       - usr/share/metainfo/org.prismlauncher.PrismLauncher.metainfo.xml
     cmake-parameters:
@@ -88,9 +89,7 @@ parts:
       - x11-xserver-utils
       - gamemode
       - libflite1
-      - libasound2t64
       - libasound2-plugins
-      - libpulse0
   
   cleanup:
     after:

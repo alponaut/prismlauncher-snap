@@ -1,0 +1,12 @@
+diff --git a/launcher/minecraft/ShortcutUtils.cpp b/launcher/minecraft/ShortcutUtils.cpp
+index 7d662fe8b..6918cac93 100644
+--- a/launcher/minecraft/ShortcutUtils.cpp
++++ b/launcher/minecraft/ShortcutUtils.cpp
+@@ -97,6 +97,7 @@ bool createInstanceShortcut(const Shortcut& shortcut, const QString& filePath)
+         }
+     }
+ 
++    appPath = "/snap/bin/prismlauncher-alpo.prismlauncher";
+     iconPath = FS::PathCombine(shortcut.instance->instanceRoot(), "icon.png");
+ 
+     QFile iconFile(iconPath);
