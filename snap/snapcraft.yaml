@@ -53,7 +53,7 @@ parts:
       LATEST_TAG=$(curl -s https://api.github.com/repos/PrismLauncher/PrismLauncher/releases/latest | jq -r .tag_name)
       craftctl default
       git checkout "$LATEST_TAG"
-      craftctl set-version "${LATEST_TAG}"
+      craftctl set version=${LATEST_TAG}
       patch -p1 < $CRAFT_PROJECT_DIR/patches/fix-shortcuts.patch
       patch -p1 < $CRAFT_PROJECT_DIR/patches/remove-application-dir-shortcut.patch
     parse-info:
