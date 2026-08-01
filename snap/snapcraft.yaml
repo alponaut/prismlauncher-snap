@@ -66,6 +66,8 @@ parts:
       - -DLauncher_ENABLE_JAVA_DOWNLOADER=ON
       - -DLauncher_BUG_TRACKER_URL=https://github.com/alponaut/prismlauncher-snap/issues
     build-packages:
+      - curl
+      - git
       - jq
       - cmake
       - ninja-build
