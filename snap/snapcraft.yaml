@@ -1,7 +1,6 @@
 name: prismlauncher-alpo
 title: Prism Launcher
 base: core24
-version: '11.0.3'
 adopt-info: prismlauncher
 license: GPL-3.0
 website: https://prismlauncher.org
@@ -49,9 +48,13 @@ parts:
   prismlauncher:
     plugin: cmake
     source: https://github.com/PrismLauncher/PrismLauncher.git
-    source-tag: $SNAPCRAFT_PROJECT_VERSION
     override-pull: |
+      set -e
+      LATEST_TAG=$(curl -s https://api.github.com/repos/UPSTREAM_OWNER/UPSTREAM_REPO/releases/latest | jq -r .tag_name)
+      git fetch --tags origin
+      git checkout "$LATEST_TAG"
       craftctl default
+      craftctl set-version "${LATEST_TAG}"
       patch -p1 < $CRAFT_PROJECT_DIR/patches/fix-shortcuts.patch
       patch -p1 < $CRAFT_PROJECT_DIR/patches/remove-application-dir-shortcut.patch
     parse-info:
