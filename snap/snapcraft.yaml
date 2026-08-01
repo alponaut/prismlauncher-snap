@@ -50,6 +50,7 @@ parts:
     plugin: cmake
     source: https://github.com/PrismLauncher/PrismLauncher.git
     override-pull: |
+      craftctl default
       patch -p1 < $CRAFT_PROJECT_DIR/patches/fix-shortcuts.patch
       patch -p1 < $CRAFT_PROJECT_DIR/patches/remove-application-dir-shortcut.patch
     parse-info:
