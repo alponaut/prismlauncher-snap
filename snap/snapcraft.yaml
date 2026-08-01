@@ -9,6 +9,7 @@ issues: https://github.com/alponaut/prismlauncher-snap/issues
 source-code: https://github.com/alponaut/prismlauncher-snap
 summary: Custom Minecraft Launcher to easily manage multiple Minecraft installations
 
+version: git
 grade: stable
 confinement: strict
 
@@ -49,12 +50,6 @@ parts:
     plugin: cmake
     source: https://github.com/PrismLauncher/PrismLauncher.git
     override-pull: |
-      set -e
-      LATEST_TAG=$(curl -s https://api.github.com/repos/UPSTREAM_OWNER/UPSTREAM_REPO/releases/latest | jq -r .tag_name)
-      git fetch --tags origin
-      git checkout "$LATEST_TAG"
-      craftctl default
-      craftctl set-version "${LATEST_TAG}"
       patch -p1 < $CRAFT_PROJECT_DIR/patches/fix-shortcuts.patch
       patch -p1 < $CRAFT_PROJECT_DIR/patches/remove-application-dir-shortcut.patch
     parse-info:
